@@ -1,7 +1,8 @@
 const express = require('express');
-const {port, db} = require('./configuration/index')
+const {port, db, authApiUrl} = require('./configuration/index')
 const mongoose = require('mongoose');
-
+const axios = require('axios');
+const {response} = require('express');
 const app = express();
 
 const postSchema = new mongoose.Schema({
@@ -9,7 +10,7 @@ const postSchema = new mongoose.Schema({
 });
 const Post = mongoose.model('Post', postSchema);
 
-const logPosts = async ()=> {
+const logPosts = async () => {
   const posts = await Post.find();
   return posts;
 }
@@ -24,7 +25,7 @@ const startServer = () => {
       const newSilence = await silence.save();
       console.log('NEW SILENCE: ', newSilence)
       const posts = await Post.find();
-      console.log('POSTS: ',posts)
+      console.log('POSTS: ', posts)
 
     } catch (error) {
       console.log(error)
@@ -39,6 +40,13 @@ console.log('DB URL:', db)
 
 app.get('/test', (req, res) => {
   res.send('Our api server is working correctly!')
+});
+app.get('/testwithcurrentuser', (req, res) => {
+  axios.get(authApiUrl + '/currentuser').then(response => {
+    res.json({
+      currentUser: response.data,
+    })
+  })
 });
 
 mongoose.connect(db).then(startServer).catch((e) => console.log(e))
