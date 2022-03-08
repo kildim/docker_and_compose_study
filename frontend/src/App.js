@@ -1,6 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
 
+const makeApiRequest = () => {
+  console.log('API request')
+}
 function App() {
   return (
     <div className="App">
@@ -18,6 +21,7 @@ function App() {
           Learn React
         </a>
       </header>
+      <button onClick={makeApiRequest}>Make request</button>
     </div>
   );
 }
