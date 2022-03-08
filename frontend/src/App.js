@@ -1,8 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
 
 const makeApiRequest = () => {
-  console.log('API request')
+  axios("/api/testwithcurrentuser").then( response => {
+    console.log('API response: ', response)
+  })
 }
 function App() {
   return (
