@@ -28,7 +28,6 @@ services:
     restart: unless-stopped
     environment:
       - PORT=3002
-      - HOST=https://rw.com
       - MONGO_URL=mongodb://auth_db:27017/auth
       - API_URL=http://auth:3001/api
     depends_on:
