@@ -13,8 +13,6 @@ services:
     build: ./api
     command: npm run start
     restart: unless-stopped
-    ports:
-      - "3001:3001"
     environment:
       - PORT=3001
       - MONGO_URL=mongodb://api_db:27017/api
@@ -28,8 +26,6 @@ services:
     container_name: rw-auth
     command: npm run start
     restart: unless-stopped
-    ports:
-      - "3002:3002"
     environment:
       - PORT=3002
       - HOST=https://rw.com
