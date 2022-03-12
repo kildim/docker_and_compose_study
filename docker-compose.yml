@@ -10,6 +10,16 @@ services:
     restart: unless-stopped
     networks:
       - rw-docker-network
+  mailer:
+    container_name: rw-mailer
+    build: ./mailer
+    command: npm run start
+    restart: unless-stopped
+    environment:
+      - PORT=3003
+      - AUTH_API_URL=http://auth:3003/mailer
+    networks:
+      - rw-docker-network
   api:
     container_name: rw-api
     build: ./api
